@@ -45,7 +45,7 @@ def scrape():
     try:
         print(f"Scraping website: {website}")  # Debugging log
 
-        # Use Selenium if the website relies on JavaScript
+        # Use Selenium if the website relies on JavaScript (You may add more websites)
         html = get_dynamic_page(website) if "remoteok.io" in website else requests.get(
             website, headers={"User-Agent": "Mozilla/5.0"}
         ).text
@@ -56,7 +56,11 @@ def scrape():
         print(soup.prettify()[:500])
 
         # Find job listings (Update this selector based on website)
+        # Example: Update selector for class name according to the target site
         job_elements = soup.find_all('div', class_='job-listing')  # Modify as needed
+
+        if not job_elements:
+            print("No job elements found. Please check the selector.")  # Debugging log
 
         for job in job_elements:
             title = job.find('h2').text.strip() if job.find('h2') else 'N/A'
@@ -66,6 +70,7 @@ def scrape():
                 job_listings.append({'Job Title': title, 'Job Link': link})
 
     except Exception as e:
+        print(f"Error: {str(e)}")  # Debugging log
         return jsonify({'error': str(e)}), 500
 
     if not job_listings:
