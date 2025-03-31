@@ -1,4 +1,4 @@
-from flask import Flask, request, send_file, send_from_directory
+from flask import Flask, request, send_file, send_from_directory, render_template
 from flask_cors import CORS
 from bs4 import BeautifulSoup
 import requests
@@ -7,13 +7,13 @@ from io import BytesIO
 import os
 
 # Initialize Flask app and enable CORS
-app = Flask(__name__, static_folder="static", static_url_path="/static")
+app = Flask(__name__, static_folder="static", template_folder="templates")
 CORS(app)  # Allow all origins by default
 
 @app.route('/')
 def index():
-    # Serve the index.html file correctly
-    return send_from_directory('static', 'index.html')
+    # Render the index.html correctly
+    return render_template('index.html')
 
 @app.route('/scrape', methods=['POST'])
 def scrape():
