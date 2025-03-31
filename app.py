@@ -1,4 +1,4 @@
-from flask import Flask, request, send_file
+from flask import Flask, render_template, request, send_file
 from flask_cors import CORS
 from bs4 import BeautifulSoup
 import requests
@@ -11,8 +11,8 @@ CORS(app)  # Allow all origins by default, or configure for specific domains
 
 @app.route('/')
 def index():
-    # Serve the static index.html file from /static folder
-    return app.send_static_file('index.html')
+    # Use render_template() to serve the HTML file from /templates folder
+    return render_template('index.html')
 
 @app.route('/scrape', methods=['POST'])
 def scrape():
@@ -54,7 +54,5 @@ def scrape():
     # Return the CSV file as a response (download link)
     return send_file(output, as_attachment=True, download_name='job_listings.csv', mimetype='text/csv')
 
-
 if __name__ == '__main__':
-    # Start the Flask app on all network interfaces, which is necessary for Render
     app.run(debug=False, host='0.0.0.0', port=5000)
