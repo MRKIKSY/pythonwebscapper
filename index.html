@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Scraper</title>
+    <!-- Corrected path for styles.css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <h1>Job Scraper</h1>
+    <div>
+        <label for="website">Enter Website:</label>
+        <input type="text" id="website" placeholder="Enter Website URL">
+    </div>
+    <div>
+        <label for="keywords">Enter Keywords (comma separated):</label>
+        <input type="text" id="keywords" placeholder="e.g. developer, engineer">
+    </div>
+    <button id="scrapeButton">Begin Web Scraping</button>
+
+    <!-- Corrected path for script.js -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
